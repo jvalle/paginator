@@ -12,16 +12,16 @@
 		itemsToPaginate.hide();
 
 		function showMore(list, num) {
-	        for (var i = showCounter; i < showCounter + num; i++) {
-	            list.eq(i).show();
-	        }   
-	        showCounter += num;
-	        list.eq(showCounter - 1).append('<p class=\"seeMore\"><a style=\"cursor: pointer;\">See More</a></p>');
+	            for (var i = showCounter; i < showCounter + num; i++) {
+	                list.eq(i).show();
+	            }   
+	            showCounter += num;
+	            list.eq(showCounter - 1).append('<p class=\"seeMore\"><a style=\"cursor: pointer;\">See More</a></p>');
 
-	        $('.seeMore').on('click', function() {
-	            this.remove();
-	            showMore(itemsToPaginate, num);
-	        });
+	            $('.seeMore').on('click', function() {
+	                this.remove();
+	                showMore(itemsToPaginate, num);
+	            });
 	    };
 
 	    showMore(itemsToPaginate, numToShow);
