@@ -3,7 +3,7 @@
 // No License Here, just have fun
 
 (function($) {
-  $.fn.paginator = function() {
+	$.fn.paginator = function() {
 		var itemsToPaginate = [],
 		    numToShow = parseInt($(this).attr('data-pagination')),
 		    showCounter = 0;
@@ -16,7 +16,7 @@
 	            list.eq(i).show();
 	        }   
 	        showCounter += num;
-	        list.eq(showCounter - 1).append('<p><a class=\"seeMore\" style=\"cursor: pointer;\">See More</a></p>');
+	        list.eq(showCounter - 1).append('<p class=\"seeMore\"><a style=\"cursor: pointer;\">See More</a></p>');
 
 	        $('.seeMore').on('click', function() {
 	            this.remove();
