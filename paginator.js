@@ -5,8 +5,8 @@
 (function($) {
   $.fn.paginator = function() {
 		var itemsToPaginate = [],
-			numToShow = parseInt($(this).attr('data-pagination')),
-			showCounter = 0;
+		    numToShow = parseInt($(this).attr('data-pagination')),
+		    showCounter = 0;
 
 		itemsToPaginate = $(this).children();
 		itemsToPaginate.hide();
