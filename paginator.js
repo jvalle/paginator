@@ -21,7 +21,7 @@
                         list.eq(showCounter - 1).append('<p class=\"seeMore\"><a style=\"cursor: pointer;\">See More</a></p>');
 
                         $('.seeMore').on('click', function() {
-                            this.remove();
+                            $(this).remove();
                             showMore(itemsToPaginate, num);
                         });
                 };
