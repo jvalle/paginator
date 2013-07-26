@@ -1,33 +1,55 @@
 // Paginator jQuery plugin
 // Written By: Jason Valle
-// No License Here, just have fun
+// MIT License (Is that sufficient?)
 
 (function($) {
-    $.fn.paginator = function() {
-        $(this).each(function() {
-            var itemsToPaginate = [],
-                numToShow = parseInt($(this).attr('data-pagination')),
-                showCounter = 0;
+    $.fn.paginator = function(options) {
 
-            itemsToPaginate = $(this).children();
+        var settings = $.extend({
+            showAll: true
+        }, options);
+
+        return this.each(function(index) {
+
+            // console.log(index);
+
+            var showCounter = 0,
+            itemsToPaginate = $(this).children(),
+            numToShow = parseInt($(this).attr('data-pagination'));
+
+            console.log(itemsToPaginate.length);
+
             if (itemsToPaginate.length > numToShow) {
                 itemsToPaginate.hide();
 
-                function showMore(list, num) {
-                        for (var i = showCounter; i < showCounter + num; i++) {
-                            list.eq(i).show();
-                        }   
-                        showCounter += num;
-                        list.eq(showCounter - 1).append('<p class=\"seeMore\"><a style=\"cursor: pointer;\">See More</a></p>');
+                showMore(numToShow);
+            }
 
-                        $('.seeMore').on('click', function() {
-                            $(this).remove();
-                            showMore(itemsToPaginate, num);
-                        });
-                };
+            function showMore(num) {
+                var $showMore = $('<a class="showMore" style="cursor: pointer">Show More</a>'),
+                    $showAll = $('<a class="showAll" style="cursor: pointer">Show All</a>'),
+                    $p = $('<p></p>').append($showMore).append($showAll)
 
-                showMore(itemsToPaginate, numToShow);
-            }       
+
+                for (var i = showCounter; i < showCounter + num; i++) {
+                    itemsToPaginate.eq(i).show();
+                }   
+                showCounter += num;
+
+                // console.log(showCounter);
+
+                itemsToPaginate.eq(showCounter - 1).append($p);
+
+                $showMore.on('click', function() {
+                    $(this).parent().remove();
+                    showMore(num);
+                });
+
+                $showAll.on('click', function() {
+                    $(this).parent().remove();
+                    showMore(itemsToPaginate.length);
+                });
+            };
         });
     };
 })(jQuery);
