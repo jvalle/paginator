@@ -39,7 +39,7 @@
                 }   
                 showCounter += num;
 
-                itemsToPaginate.eq(showCounter - 1).append($p);
+                itemsToPaginate.parent().append($p);
 
                 $showMore.on('click', function() {
                     $(this).parent().remove();
