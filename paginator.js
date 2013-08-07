@@ -13,6 +13,7 @@
             
             var showCounter = 0,
             itemsToPaginate = $(this).children(),
+            totalItems = itemsToPaginate.length,
             numToShow = parseInt($(this).attr('data-pagination'));
 
             if (itemsToPaginate.length > numToShow) {
@@ -24,12 +25,15 @@
             function showMore(num) {
                 var $showMore = $('<a class="showMore" style="cursor: pointer">Show More</a>'),
                     $showAll = $('<a class="showAll" style="cursor: pointer">Show All</a>'),
-                    $p = $('<p></p>').append($showMore);
+                    $p = null;
 
+                if (totalItems - showCounter > numToShow) {
+                    $p = $('<p></p>').append($showMore);
                     if (settings.showAll) {
                         $p = $p.append($showAll);
                     }
-
+                }
+                    
                 for (var i = showCounter; i < showCounter + num; i++) {
                     itemsToPaginate.eq(i).show();
                 }   
