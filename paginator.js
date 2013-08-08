@@ -27,7 +27,7 @@
                     $showAll = $('<a class="showAll" style="cursor: pointer">Show All</a>'),
                     $p = null;
 
-                if (totalItems - showCounter > numToShow) {
+                if (totalItems - showCounter > num) {
                     $p = $('<p></p>').append($showMore);
                     if (settings.showAll) {
                         $p = $p.append($showAll);
