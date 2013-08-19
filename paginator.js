@@ -29,7 +29,7 @@
                 }   
                 showCounter += num;
 
-                if (itemsToPaginate.filter(':not(:visible)').length) {
+                if (itemsToPaginate.length > showCounter) {
                     showButtons();
                 }
             };
