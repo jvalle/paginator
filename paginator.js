@@ -4,22 +4,22 @@
 
 (function($) {
     $.fn.paginator = function(options) {
-
-        var settings = $.extend({
-            showMore: true,
-            showAll: true
-        }, options);
-
         return this.each(function(index) {
-            
             var showCounter = 0,
-            itemsToPaginate = $(this).children(),
-            numToShow = parseInt($(this).attr('data-pagination'));
+                itemsToPaginate = $(this).children(),
+                settings = $.extend({
+                    showMore: true,
+                    showAll: true,
+                    numToShow: 5
+                }, options);
 
-            if (itemsToPaginate.length > numToShow) {
+            // use the number from the data-pagination attribute, if it exists
+            settings.numToShow = parseInt($(this).attr('data-pagination'), 10) || settings.numToShow;
+
+            if (itemsToPaginate.length > settings.numToShow) {
                 itemsToPaginate.hide();
 
-                showMore(numToShow);
+                showMore(settings.numToShow);
             }
 
             function showMore(num) {
@@ -41,7 +41,7 @@
                     $('<a class="showMore" style="cursor: pointer">Show More</a>')
                     .on('click', function() {
                         $(this).parent().remove();
-                        showMore(numToShow);
+                        showMore(settings.numToShow);
                     })
                     .appendTo($p)
                 }
