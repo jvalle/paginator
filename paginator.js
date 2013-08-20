@@ -7,6 +7,7 @@
         return this.each(function(index) {
             var showCounter = 0,
                 itemsToPaginate = $(this).children(),
+                buttonSettings = $(this).attr('data-pagination-buttons'),
                 settings = $.extend({
                     showMore: true,
                     showAll: true,
@@ -15,6 +16,16 @@
 
             // use the number from the data-pagination attribute, if it exists
             settings.numToShow = parseInt($(this).attr('data-pagination'), 10) || settings.numToShow;
+
+            // if a data-pagination-buttons setting was set, use that to determine which buttons to show
+            if (buttonSettings) {
+                // ignore case
+                buttonSettings = buttonSettings.toLowerCase();
+
+                // check to see if each of the buttons is mentioned in the string
+                settings.showMore = buttonSettings.indexOf('showmore') > -1;
+                settings.showAll = buttonSettings.indexOf('showall') > -1;
+            }
 
             if (itemsToPaginate.length > settings.numToShow) {
                 itemsToPaginate.hide();
